@@ -10,7 +10,6 @@ const App = () => {
       <TitleBar />
       <TextArea />
       <NoteArea />
-      <Footer />
     </div>
   );
 };

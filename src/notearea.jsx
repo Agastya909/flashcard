@@ -25,7 +25,7 @@ const NoteArea = () => {
   };
 
   return (
-    <div>
+    <div className="mb-4">
       <div className="text-3xl" onClick={getAll}>
         click me
       </div>
