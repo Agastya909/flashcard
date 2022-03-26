@@ -2,30 +2,55 @@ import { useState } from "react";
 import axios from "axios";
 const TextArea = (props) => {
   const priorityList = [
-    { label: "High", value: "High", color: "red" },
-    { label: "Medium", value: "Medium", color: "yellow" },
-    { label: "Low", value: "Low", color: "blue" },
+    { label: "High", value: "High", color: "bg-red-400" },
+    { label: "Medium", value: "Medium", color: "bg-yellow-300" },
+    { label: "Low", value: "Low", color: "bg-blue-400" },
   ];
 
   const [Flashcard, setFlashcard] = useState({
     title: "",
     note: "",
-    priority: "Moderate",
-    color: "Yellow",
+    priority: "Medium",
+    color: "bg-yellow-300",
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    let setColor;
-    if (value === "Moderate") setColor = "yellow";
-    else if (value === "Important") setColor = "red";
-    else setColor = "blue";
+
     setFlashcard((prevData) => {
       return {
         ...prevData,
         [name]: value,
+        // color: setColor,
+      };
+    });
+  };
+
+  const handleColor = (event) => {
+    const { value } = event.target;
+    let setColor;
+    if (value === "Medium") {
+      setColor = "bg-yellow-300";
+    } else if (value === "High") {
+      setColor = "bg-red-400";
+    } else if (value === "Low") {
+      setColor = "bg-blue-400";
+    }
+
+    setFlashcard((prevData) => {
+      return {
+        ...prevData,
         color: setColor,
       };
+    });
+  };
+
+  const resetData = () => {
+    setFlashcard({
+      title: "",
+      note: "",
+      priority: "Medium",
+      color: "bg-yellow-300",
     });
   };
 
@@ -40,15 +65,15 @@ const TextArea = (props) => {
     };
 
     axios
-      .post("http://localhost:4000/new", sendData)
+      .post("http://localhost:4000", sendData)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
     setFlashcard({
       title: "",
       note: "",
-      priority: "Moderate",
-      color: "Yellow",
+      priority: "Medium",
+      color: "bg-yellow-300",
     });
   };
 
@@ -68,7 +93,7 @@ const TextArea = (props) => {
           <textarea
             name="note"
             maxLength={256}
-            rows={4}
+            rows="4"
             cols={46}
             value={Flashcard.note}
             onChange={handleChange}
@@ -79,25 +104,26 @@ const TextArea = (props) => {
         <div className="flex justify-between mt-5">
           <select
             name="priority"
-            onChange={handleChange}
-            className="text-lg p-2 m-2 text-gray-800 self-end bg-yellow-300 rounded-2xl text-center w-36"
+            onChange={handleColor}
+            value={Flashcard.color}
+            className="text-lg p-2 m-2 text-gray-800 self-end bg-yellow-300 rounded-md text-center w-36"
           >
             {priorityList.map((level) => (
-              <option key={level.value} value={level.value} color={level.label}>
+              <option key={level.value} value={level.value} color={level.color}>
                 {level.label}
               </option>
             ))}
           </select>
           <button
             type="submit"
-            className="text-lg p-1 m-2 text-gray-800 self-end bg-green-300 rounded-2xl text-center w-36"
+            className="text-lg p-1 m-2 text-gray-800 self-end bg-green-300 rounded-md text-center w-36"
             // onClick={handleClick}
           >
             Save
           </button>
           <button
-            type="reset"
-            className="text-lg p-1 m-2 text-gray-800 self-end bg-red-300 rounded-2xl text-center w-36"
+            onClick={resetData}
+            className="text-lg p-1 m-2 text-gray-800 self-end bg-red-300 rounded-md text-center w-36"
           >
             Cancel
           </button>
