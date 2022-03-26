@@ -27,7 +27,7 @@ router.route("/:id").get((req, res) => {
 
 // post
 
-router.route("/new").post((req, res) => {
+router.route("/").post((req, res) => {
   const noteTitle = req.body.noteTitle;
   const noteData = req.body.noteData;
   const noteColor = req.body.noteColor;
