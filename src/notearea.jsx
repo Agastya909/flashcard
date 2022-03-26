@@ -1,15 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
-import { useEffect } from "react/cjs/react.production.min";
 import Card from "./card";
 
 const NoteArea = () => {
   const [flashcard, setflashcard] = useState([]);
-  const addNote = (newFlashcard) => {
-    setflashcard((prevFlashcard) => {
-      return [...prevFlashcard, newFlashcard];
-    });
-  };
 
   const getAll = () => {
     axios
@@ -17,7 +11,6 @@ const NoteArea = () => {
       .then((res) => {
         const data = res.data;
         setflashcard(data);
-        console.log(flashcard);
       })
       .catch((err) => {
         console.log(err);
@@ -29,16 +22,16 @@ const NoteArea = () => {
       <div className="text-3xl" onClick={getAll}>
         click me
       </div>
-      <div className="grid gap-4 grid-cols-4 justify-items-center">
+      <div className="grid gap-8 grid-cols-4 justify-items-center">
         {flashcard.map((cardData, index) => {
           return (
             <Card
               key={index}
-              id={index}
+              id={cardData._id}
               notetitle={cardData.noteTitle}
               notedata={cardData.noteData}
-              notecolor={cardData.color}
-              notepriority={cardData.priority}
+              notecolor={cardData.noteColor}
+              notepriority={cardData.notePriority}
             />
           );
         })}
