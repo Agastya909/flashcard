@@ -1,9 +1,9 @@
 import React from "react";
 import TitleBar from "./titleBar";
-import TextArea from "./inputArea";
+import TextArea from "./TextArea";
 import NoteArea from "./notearea";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Editpage from "./Editpage";
+import UpdatePage from "./UpdatePage";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
             </div>
           }
         />
-        <Route path="/update" element={<Editpage />} />
+        <Route path="/update/:id" element={<UpdatePage />} />
       </Routes>
     </BrowserRouter>
   );
