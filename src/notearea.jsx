@@ -11,6 +11,7 @@ const NoteArea = () => {
       .then((res) => {
         const data = res.data;
         setflashcard(data);
+        console.log(flashcard);
       })
       .catch((err) => {
         console.log(err);
