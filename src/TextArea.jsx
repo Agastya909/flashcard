@@ -1,12 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
-const TextArea = (props) => {
-  const priorityList = [
-    { label: "High", value: "High", color: "bg-red-400" },
-    { label: "Medium", value: "Medium", color: "bg-yellow-300" },
-    { label: "Low", value: "Low", color: "bg-blue-400" },
-  ];
+import HeadingInput from "./components/HeadingInput";
+import NoteInput from "./components/NoteInput";
+import PriorityInput from "./components/PriorityInput";
+import SubmitBtn from "./components/SubmitBtn";
+import CancelBtn from "./components/CancelBtn";
 
+const TextArea = () => {
   const [Flashcard, setFlashcard] = useState({
     title: "",
     note: "",
@@ -21,7 +21,6 @@ const TextArea = (props) => {
       return {
         ...prevData,
         [name]: value,
-        // color: setColor,
       };
     });
   };
@@ -81,51 +80,13 @@ const TextArea = (props) => {
     <div className="flex justify-center p-4 drop-shadow-md">
       <form className="flex flex-col m-2" onSubmit={submitForm}>
         <div className="flex flex-col border-none  bg-gray-700 text-white  rounded-lg text-lg  font-bold">
-          <input
-            name="title"
-            type="text"
-            maxLength={64}
-            placeholder="Title"
-            value={Flashcard.title}
-            onChange={handleChange}
-            className="border-none outline-none p-2 m-1 bg-gray-700 text-white rounded-b"
-          ></input>
-          <textarea
-            name="note"
-            maxLength={256}
-            rows="4"
-            cols={46}
-            value={Flashcard.note}
-            onChange={handleChange}
-            className="border-none outline-none p-2 m-1 bg-gray-700 text-white "
-            placeholder="Flashcard"
-          ></textarea>
+          <HeadingInput onchange={handleChange} value={Flashcard.title} />
+          <NoteInput onchange={handleChange} value={Flashcard.note} />
         </div>
         <div className="flex justify-between mt-5">
-          <select
-            // name="priority"
-            onChange={handleColor}
-            className="text-lg p-2 m-2 text-gray-800 self-end bg-yellow-300 rounded-md text-center w-36"
-          >
-            {priorityList.map((level) => (
-              <option key={level.label} value={level.value} color={level.color}>
-                {level.label}
-              </option>
-            ))}
-          </select>
-          <button
-            type="submit"
-            className="text-lg p-1 m-2 text-gray-800 self-end bg-green-300 rounded-md text-center w-36"
-            // onClick={handleClick}
-          >
-            Save
-          </button>
-          <button
-            onClick={resetData}
-            className="text-lg p-1 m-2 text-gray-800 self-end bg-red-300 rounded-md text-center w-36"
-          >
-            Cancel
-          </button>
+          <PriorityInput onchange={handleColor} />
+          <SubmitBtn />
+          <CancelBtn onclick={resetData} />
         </div>
       </form>
     </div>
