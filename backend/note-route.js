@@ -10,7 +10,7 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json(`error : ${err}`));
 });
 
-router.route("/:id").get((req, res) => {
+router.route("/note/:id").get((req, res) => {
   Note.findById(req.params.id)
     .then((note) => res.json(note))
     .catch((err) => res.status(400).json(`error : ${err}`));
