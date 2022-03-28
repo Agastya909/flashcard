@@ -8,6 +8,7 @@ import PriorityInput from "./components/PriorityInput";
 import SubmitBtn from "./components/SubmitBtn";
 import CancelBtn from "./components/CancelBtn";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const UpdatePage = (props) => {
   const location = useLocation();
@@ -19,8 +20,8 @@ const UpdatePage = (props) => {
     priority: "",
     color: "",
   });
-  const seeData = () => {
-    console.log(id);
+
+  useEffect(() => {
     axios
       .get(`http://localhost:4000/note/${id}`)
       .then((res) => {
@@ -33,7 +34,23 @@ const UpdatePage = (props) => {
         console.log(Flashcard);
       })
       .catch((err) => console.log(`error is : ${err}`));
-  };
+  }, []);
+
+  // const seeData = () => {
+  // console.log(id);
+  // axios
+  // .get(`http://localhost:4000/note/${id}`)
+  // .then((res) => {
+  // setFlashcard({
+  // title: res.data.noteTitle,
+  // note: res.data.noteData,
+  // priority: res.data.notePriority,
+  // color: res.data.noteColor,
+  // });
+  // console.log(Flashcard);
+  // })
+  // .catch((err) => console.log(`error is : ${err}`));
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -82,7 +99,8 @@ const UpdatePage = (props) => {
       .patch(`http://localhost:4000/update/${id}`, updateData)
       .then((res) => console.log(`note updated : ${res.data}`))
       .catch((err) => console.log(`error : ${err}`));
-  };
+    
+    };
 
   return (
     <>
@@ -100,7 +118,6 @@ const UpdatePage = (props) => {
           </div>
         </form>
       </div>
-      <div onClick={seeData}>click me to check data</div>
     </>
   );
 };

@@ -1,11 +1,25 @@
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 import Card from "./card";
 
 const NoteArea = () => {
   const [flashcard, setflashcard] = useState([]);
 
-  const getAll = () => {
+  // const getAll = () => {
+  // axios
+  // .get("http://localhost:4000")
+  // .then((res) => {
+  // const data = res.data;
+  // setflashcard(data);
+  // console.log(flashcard);
+  // })
+  // .catch((err) => {
+  // console.log(err);
+  // });
+  // };
+
+  useEffect(() => {
     axios
       .get("http://localhost:4000")
       .then((res) => {
@@ -16,13 +30,10 @@ const NoteArea = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
 
   return (
     <div className="mb-4">
-      <div className="text-3xl" onClick={getAll}>
-        click me
-      </div>
       <div className="grid gap-8 grid-cols-4 justify-items-center">
         {flashcard.map((cardData, index) => {
           return (
