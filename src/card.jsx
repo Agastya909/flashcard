@@ -21,8 +21,8 @@ const Card = (props) => {
       .catch((err) => {
         console.log(`error is ${err}`);
       });
+    window.location.href = "/";
   };
-
   const handleClick = () => {
     console.log(oneNote);
   };

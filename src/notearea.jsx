@@ -6,19 +6,6 @@ import Card from "./card";
 const NoteArea = () => {
   const [flashcard, setflashcard] = useState([]);
 
-  // const getAll = () => {
-  // axios
-  // .get("http://localhost:4000")
-  // .then((res) => {
-  // const data = res.data;
-  // setflashcard(data);
-  // console.log(flashcard);
-  // })
-  // .catch((err) => {
-  // console.log(err);
-  // });
-  // };
-
   useEffect(() => {
     axios
       .get("http://localhost:4000")

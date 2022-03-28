@@ -36,22 +36,6 @@ const UpdatePage = (props) => {
       .catch((err) => console.log(`error is : ${err}`));
   }, []);
 
-  // const seeData = () => {
-  // console.log(id);
-  // axios
-  // .get(`http://localhost:4000/note/${id}`)
-  // .then((res) => {
-  // setFlashcard({
-  // title: res.data.noteTitle,
-  // note: res.data.noteData,
-  // priority: res.data.notePriority,
-  // color: res.data.noteColor,
-  // });
-  // console.log(Flashcard);
-  // })
-  // .catch((err) => console.log(`error is : ${err}`));
-  // };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -97,10 +81,12 @@ const UpdatePage = (props) => {
     };
     axios
       .patch(`http://localhost:4000/update/${id}`, updateData)
-      .then((res) => console.log(`note updated : ${res.data}`))
+      .then((res) => {
+        console.log(`note updated : ${res.data}`);
+        window.location.href = "/";
+      })
       .catch((err) => console.log(`error : ${err}`));
-    
-    };
+  };
 
   return (
     <>
